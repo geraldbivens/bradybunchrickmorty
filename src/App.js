@@ -9,6 +9,21 @@ class App extends Component {
     characters: []
   }
 
+  deleteCharacter = (characterToDelete) => {
+    // Optimistic
+    const characters = this.state.characters.filter(character => {
+      return character.id !== characterToDelete.id
+    })
+    this.setState({
+      characters
+    })
+
+    // Persistence
+    fetch("URL/:id", {
+      method: "DELETE"
+    })
+  }
+
   componentDidMount(){
     fetch("https://rickandmortyapi.com/api/character/?page=10")
     .then(response => response.json())
@@ -17,7 +32,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <CharacterContainer characters={this.state.characters} />
+        <CharacterContainer deleteCharacter={this.deleteCharacter} characters={this.state.characters} />
       </div>
     );
   }

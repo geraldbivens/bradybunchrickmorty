@@ -14,3 +14,9 @@
 .character-card:hover{
   cursor: pointer;
 }
+
+.delete {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+}
